@@ -1,3 +1,3 @@
 # Library
 
-- This is a  small type of a clone library app.
+This is a  small type of a  library app.
