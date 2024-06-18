@@ -6,21 +6,25 @@
         <link rel="stylesheet" href="lib.css">
     </head>
     <body>
+        <div class="header">
         <h1>My Library</h1>
         <div id="books"></div>
         <button id=newBookButton>New Book</button>
-        <div id="addBookForm" style="display: none;"> <form id = "bookForm">
-         <label for="title">Title:</label><br>
-         <input type="text" id="title" name="title" required><br>
-         <label for="author">Author:</label><br>
-         <input type="text" id="author" name="author" required><br>
-         <label for="pages">Pages:</label><br>
-         <input type="number" id="pages" name="pages" required><br>
-         <label for="read">Read?:</label><br>
-         <input type="checkbox" id="read" name="read" required><br>
-         <button type="submit">Add Book</button>
-        </form>
         </div>
+        <dialog class="modal">
+            <p>Add a new book</p>
+            <form method="dialog">
+         <input type="text" id="title" name="title" required><br>
+         <input type="text" id="author" name="author" required><br>
+         <input type="number" id="pages" name="pages" required><br>
+         <div class="checkbox-container">
+            <label for="read">Read?</label>
+            <input type="checkbox" id="read">
+            </div>
+         <button type="submit" id="new-book">Add Book</button>
+        </form>
+        </dialog>
+        <div class="card-container"></div>
         <script src="lib.js"></script>
     </body>
 </html>
