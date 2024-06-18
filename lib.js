@@ -12,7 +12,12 @@ function addBookToLibrary (myLibrary) {
    myLibrary.push (new Book ("Pride and Prejudice", "Jane Austen", "920"));
    myLibrary.push (new Book ("To Kill a Morckingbird", "Haper Lee", "1030"));
    console.log ("Books added to the library !");
-}
+
+  
+  displayBooks(myLibrary);
+  document.getElementById("addBookForm").style.display = "none";
+
+   }
 
 function displayBooks (myLibrary) {
     const booksContainer = document.getElementById("books");
@@ -37,32 +42,10 @@ function displayBooks (myLibrary) {
 addBookToLibrary(myLibrary);
 displayBooks(myLibrary);
 
-function handleNewBookForm (event) {
-      event.preventDefault();
-      const titleInput = document.getElementById("newBookTitle");
-      const authorInput = document.getElementById("newBookAuthor");
-      const pagesInput = document.getElementById("newBookPages");
-      const readCheckbox = document.getElementById("newBookRead");
 
-      const newBook = new Book (
-        titleInput.value,
-        authorInput.value,
-        parseInt(pagesInput.value),
-        readCheckbox.checked
-      );
 
-      myLibrary.push(newBook);
-      displayBooks(myLibrary);
+     
 
-      titleInput.value = "";
-      authorInput.value = "";
-      pagesInput.value = "";
-      readCheckbox.checked = false;
-}
-
-const newBookForm = document.createElement("form");
-newBookForm.id = "newBookForm";
-newBookForm.style.display = "none";
 
 
 
