@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Library</title>
-        <link rel="stylesheet" href="lib.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="lib.css">
+    <script src="lib.js" defer></script>
+</head>
+<body>
+    <div class="container">
         <div class="header">
-        <h1>My Library</h1>
-        <div id="books"></div>
-        <button id=newBookButton>New Book</button>
-        </div>
-        <dialog class="modal">
-            <p>Add a new book</p>
-            <form method="dialog">
-         <input type="text" id="title" name="title" required><br>
-         <input type="text" id="author" name="author" required><br>
-         <input type="number" id="pages" name="pages" required><br>
-         <div class="checkbox-container">
-            <label for="read">Read?</label>
-            <input type="checkbox" id="read">
+            <h1>Library</h1>
+            <button id="new-book-button">NEW BOOK</button>
+            <div class="new-book-form-popup">
+                <form action="" >
+
+                    <h1>Add a book</h1>
+                    <ul class="form-container">
+                        
+                        <li>
+                            <label for="title">Title:</label>
+                            <input type="text" id="title">
+                        </li>
+                        <li>
+                            <label for="author">Author:</label>
+                            <input type="text" id="author">
+                        </li>
+                        <li>
+                            <label for="pages">Number of pages:</label>
+                            <input type="number" id="pages">
+                        </li>
+                        <li>
+                            <label for="is-read">Has been is-read</label>
+                            <input type="checkbox" id="is-read">
+                        </li>
+                   
+                    </ul>
+
+                    <div class="buttons">
+                        <button type="submit" class="btn-add">Add book</button>
+                        <button type="button" class="btn-close">Close</button>
+                    </div>
+                </form>
             </div>
-         <button type="submit" id="new-book">Add Book</button>
-        </form>
-        </dialog>
-        <div class="card-container"></div>
-        <script src="lib.js"></script>
-    </body>
+        </div>
+        <div class="books"></div>
+    </div>
+
+</body>
 </html>

@@ -1,111 +1,124 @@
-const myLibrary = [];
-const cardContainer = document.querySelector(".card-container");
-const showBtn = document.querySelector(".add-book");
-const modal = document.querySelector(".modal");
-const addBtn = document.getElementById("new-book");
+let myLibrary = [];
+const booksDisplay = document.querySelector(".books");
 
-Book.id = 0;
-
-function Book (title, author, pages, read) {
-    this.bookId = `book${++Book.id}`;
+function Book(title, author, pages, isRead){
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.isRead = isRead;
+
+    this.info = function(){
+        return `${title} by ${author}, is ${pages} pages, ${isRead ? "has been read" : "has not yet been read"}`;
+    }
 }
 
-function addBookToLibrary(book) {
-  const card = document.createElement("div");
-  card.classList.add("card");
-  
-  const cardTitle = document.createElement("h2");
-  cardTitle.textContent = `Title: ${book.title}`;
-
-  const cardAuthor = document.createElement("p");
-  cardAuthor.textContainer = `Author: ${book.author}`;
-
-  const cardPages = document.createElement("p");
-  cardPages.textContent = `Pages : ${book.pages}`;
-
-  const removeBtn = document.createElement("button");
-  removeBtn.textContent = "Remove";
-
-  const readBtn  = document.createElement("button");
-  readBtn.textContent = book.read ? "Read" : "Not Read";
-
-  card.appendChild(cardTitle);
-  card.appendChild(cardAuthor);
-  card.appendChild(cardPages);
-  card.appendChild(readBtn);
-  card.appendChild(removeBtn);
-
-  readBtn.onclick = () => toggleRead(book.bookId);
-  removeBtn.onclick = () =>removeBook(book.bookId);
-
-  cardContainer.appendChild(card);
+Book.prototype.toggleReadStatus = function() {
+    console.log("hi");
+    this.isRead = !this.isRead;
 }
 
-function renderLibrary() {
-    cardContainer.innerHTML = "";
-    myLibrary.forEach(book => addBookToLibrary(book));
-}
-
-function clearModalInputs () {
-    document.getElementById("title").value = "";
-    document.getElementById("author").value = "";
-    document.getElementById("pages").value = "";
-    document.getElementById("read").checked = false;
-}
-
-function validateInputs(title,author,pages) {
-    if (title==="" ||author ==="" ||pages==="") {
-        alert("Please fill out all fields");
-        return false;
-    }
-    return true;
-    }
-
-    function removeBook (bookId) {
-     myLibrary = myLibrary.filter(book =>book.bookId !== bookId);
-     renderLibrary();
-    }
-
-   function toggleRead (bookId) {
-      const book = myLibrary.find(book =>book.bookId === bookId);
-      book.read = !book.read;
-      renderLibrary();
-   }
-
-   showBtn.addEventListener("click", () => {
-    modal.showModal();
-   })
-
-   addBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById("title").value;
-    const author = document.getElementById("author").value;
-    const pages = document.getElementById("pages").value;
-    const read = document.getElementById("read").checked;
-
-    if(!validateInputs(title, author, pages)) {
-        return;
-    }
-
-    const newBook = new Book(title, author, pages, read);
+function addNewBookToLibrary(title, author, pages, isRead){
+    let newBook = new Book(title, author, pages, isRead);
+    newBook.index = myLibrary.length;
     myLibrary.push(newBook);
-    renderLibrary();
-    clearModalInputs();
-    modal.closest();
-   })
+    
+}
 
-   const book1 = new Book("To Kill a Mockingbird", "Harper Lee", "281", "true");
-   const book2 = new Book("While Passion Sleeps", "Shirleen Buzbee", "698", "true");
-   const book3 = new Book("Blossom Street", "Debby Macomber", "500", "true");
-   myLibrary.push(book1, book2, book3);
+function displayLibrary() {
+    clearDisplayLibrary();
 
-   renderLibrary();
+    myLibrary.forEach(book => {
+        displayBook(book);
+    });
+}
+
+function clearDisplayLibrary() {
+    booksDisplay.textContent = "";
+}
+
+function removeBook(book) {
+    let i = 0;
+    while((book = book.previousSibling) != null){
+        i++
+    }
+    myLibrary.splice(i, 1);
+}
+
+function displayBook(book){
+    // Create book card
+    const bookCard = document.createElement("div");
+    const title = document.createElement("p");
+    const author = document.createElement("p");
+    const pages = document.createElement("p");
+    const isRead = document.createElement("p");
+    const removeBtn = document.createElement("button");
+    const toggleReadStatusBtn = document.createElement("button");
+
+    bookCard.classList.add("card");
+    removeBtn.classList.add("remove-btn");
+    toggleReadStatusBtn.classList.add("read-status-btn");
+
+    // Update textContent of elements
+    title.textContent = `title: ${book.title}`;
+    author.textContent = "author: " + book.author;
+    pages.textContent = "pages: " + book.pages;
+    isRead.textContent = book.isRead ? "Read" : "Has not yet been read";
+
+    removeBtn.textContent = "Remove Book";
+    removeBtn.addEventListener("click", () => {
+        removeBook(bookCard);
+        displayLibrary();
+        
+    })
+
+    toggleReadStatusBtn.textContent = "Change Read Status";
+    toggleReadStatusBtn.addEventListener("click", () => {
+        book.toggleReadStatus();
+        displayLibrary();
+
+    })
+
+    // Add the card onto books display
+    bookCard.appendChild(title);
+    bookCard.appendChild(author);
+    bookCard.append(pages);
+    bookCard.append(isRead);
+    bookCard.appendChild(removeBtn);
+    bookCard.appendChild(toggleReadStatusBtn);
+
+    booksDisplay.appendChild(bookCard);
+
+  
+}
+
+function openAddNewBookForm(){
+    document.querySelector(".new-book-form-popup").style.display = "block";
+}
+
+function closeAddNewBookForm(){
+    document.querySelector(".new-book-form-popup").style.display = "none";
+}
+
+// Open and close the form
+const newBookButton = document.getElementById("new-book-button");
+newBookButton.addEventListener("click", openAddNewBookForm);
+const closeFormButton = document.querySelector(".btn-close");
+closeFormButton.addEventListener("click", closeAddNewBookForm);
+
+// Add new book from form and add to display
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const pagesInput = document.querySelector("#pages");
+const isReadInput = document.querySelector("#is-read")
+const addBookButton = document.querySelector(".btn-add");   
+addBookButton.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    addNewBookToLibrary(titleInput.value, authorInput.value, 
+        pagesInput.value, isReadInput.value);
+    displayLibrary();
+    closeAddNewBookForm();
+})
 
 
-
- 
+displayLibrary();
