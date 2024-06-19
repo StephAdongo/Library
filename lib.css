@@ -1,0 +1,66 @@
+li {
+    list-style-type: none;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+    width: fit-content;
+    height: 100vh;
+}
+.header{
+    display: grid;
+    justify-content: center;
+}
+
+.books{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+    grid-auto-rows: 250px;
+    gap: 10px;
+    padding: 10px;
+}
+
+.card{
+    border: 2px solid black;
+    padding: 10px;
+}
+.new-book-form-popup {
+    display: none;
+    padding: 30px;
+    background-color: cadetblue;
+    height: 300px;
+    width:280px;
+    border: 2px solid brown;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    border-radius: 8px;
+    box-shadow: 0px 5px 5px black;
+}
+
+.new-book-form-popup .buttons{
+    display: flex;
+    gap: 50px;
+    margin-left: 45px;
+}
+
+button {
+    border-radius: 6px;
+}
+
+.new-book-form-popup .buttons button {
+    height: 24px;
+    background-color:brown;
+    color: whitesmoke;
+    border-color: brown;
+}
+
+h2{
+    text-align: center;
+}
+.form-container input::after{color: blue;}
+
+
+
+
