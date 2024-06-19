@@ -8,7 +8,7 @@ function Book(title, author, pages, isRead){
     this.isRead = isRead;
 
     this.info = function(){
-        return `${title} by ${author}, is ${pages} pages, ${isRead ? "has been read" : "has not yet been read"}`;
+        return `${title} by ${author}, is ${pages} pages, ${isRead ? " read" : " not read"}`;
     }
 }
 
@@ -59,19 +59,19 @@ function displayBook(book){
     toggleReadStatusBtn.classList.add("read-status-btn");
 
     // Update textContent of elements
-    title.textContent = `title: ${book.title}`;
-    author.textContent = "author: " + book.author;
-    pages.textContent = "pages: " + book.pages;
-    isRead.textContent = book.isRead ? "Read" : "Has not yet been read";
+    title.textContent = `Title: ${book.title}`;
+    author.textContent = "Author: " + book.author;
+    pages.textContent = "Pages: " + book.pages;
+    isRead.textContent = book.isRead ? "Read" : " Not read";
 
-    removeBtn.textContent = "Remove Book";
+    removeBtn.textContent = "Remove";
     removeBtn.addEventListener("click", () => {
         removeBook(bookCard);
         displayLibrary();
         
     })
 
-    toggleReadStatusBtn.textContent = "Change Read Status";
+    toggleReadStatusBtn.textContent = " Read Status";
     toggleReadStatusBtn.addEventListener("click", () => {
         book.toggleReadStatus();
         displayLibrary();

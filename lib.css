@@ -15,16 +15,23 @@ li {
 
 .books{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
     grid-auto-rows: 250px;
     gap: 10px;
     padding: 10px;
+    
 }
 
+
 .card{
-    border: 2px solid black;
+    border: 1px solid black;
     padding: 10px;
+    border-radius: 8px;
+    gap: 6px;
+
+
 }
+
 .new-book-form-popup {
     display: none;
     padding: 30px;
@@ -59,7 +66,7 @@ button {
 h2{
     text-align: center;
 }
-.form-container input::after{color: blue;}
+
 
 
 
