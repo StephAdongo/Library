@@ -7,3 +7,9 @@ This is a  small type of a  library app.It involves manipulation of the DOM.It h
 - Javascript
 - Html
 - CSS
+
+## Functionalities
+
+- Contains an array that stores the elements or the details of the book like the title of the book,its author and the number of pages it contains.
+- Has a function that clears or removes the books from the libary upon clicking the remove button.
+- Also has a button that keeps track of the book details entered by the user and stores them in the library upon clicking the "Add book" button.
