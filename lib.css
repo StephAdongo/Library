@@ -7,6 +7,7 @@ li {
     grid-template-rows: 1fr 10fr;
     width: fit-content;
     height: 100vh;
+    border: 1px solid black
 }
 .header{
     display: grid;
